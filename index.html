@@ -180,11 +180,43 @@ function showResults() {
   questionNumberEl.textContent = "";
   questionEl.textContent = "Quiz Complete!";
   optionsEl.innerHTML = "";
+  nextBtn.style.display = "none";
+
   messageEl.textContent = `Your score: ${score} / ${baseQuestions.length}`;
   messageEl.style.color = "#333";
-  nextBtn.style.display = "none";
+
+  const img = document.createElement("img");
+  img.id = "result-gif";
+  const motivation = document.createElement("div");
+  motivation.id = "motivation";
+
+  // ✅ GIF links
+  const lowGif = "https://raw.githubusercontent.com/k58835032-notbot/hiragana-lesson-3-reading/main/sad%20(1).gif";
+  const midGif = "https://raw.githubusercontent.com/k58835032-notbot/hiragana-lesson-3-reading/9dfe4e3c0835a43c673a94f82005d873295632c4/peach-goma.gif";
+  const highGif = "https://raw.githubusercontent.com/k58835032-notbot/hiragana-lesson-3-reading/aa252ee2e91e02c223f7e9151aa64f9abe7700e4/peach-goma-peach-and-goma.gif";
+
+  if (score <= 8) {
+    img.src = lowGif;
+    motivation.textContent = "Keep going! Practice makes perfect 💪";
+  } else if (score <= 16) {
+    img.src = midGif;
+    motivation.textContent = "Good job! You're improving fast 🌸";
+  } else {
+    img.src = highGif;
+    motivation.textContent = "Amazing! You're a Hiragana master 🎉";
+  }
+
+  optionsEl.appendChild(img);
+  optionsEl.appendChild(motivation);
+
+  const restartBtn = document.createElement("button");
+  restartBtn.textContent = "Restart Quiz";
+  restartBtn.id = "next";
+  restartBtn.onclick = () => location.reload();
+  optionsEl.appendChild(restartBtn);
 }
 
+// ✅ Start quiz on page load
 showQuestion();
 </script>
 </body>
